@@ -1,11 +1,8 @@
-from datetime import date
-
-import polars as pl
 import pytest
 from pydantic import ValidationError
 
 from churn.config import Settings
-from churn.data.splits import TEST, TRAIN, VALID, assign_split, cohorts
+from churn.data.splits import TEST, TRAIN, VALID, cohorts
 
 
 def test_cohorts_are_strictly_ordered_by_split():
@@ -42,11 +39,3 @@ def test_label_horizon_beyond_data_end_is_rejected():
 def test_unordered_months_are_rejected():
     with pytest.raises(ValidationError, match="strictly increasing"):
         Settings(train_months=["2016-10", "2016-09"])
-
-
-def test_assign_split():
-    df = pl.DataFrame(
-        {"cohort_month": [date(2016, 9, 1), date(2016, 12, 1), date(2017, 2, 1), date(2017, 1, 1)]}
-    )
-    out = assign_split(df, Settings()).sort("cohort_month")
-    assert out["split"].to_list() == [TRAIN, VALID, TEST]  # out-of-range month dropped

@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+from dataclasses import asdict
 
 import duckdb
 
@@ -22,7 +23,7 @@ def _labels(con: duckdb.DuckDBPyConnection) -> None:
 
     settings = get_settings()
     build_labels(con, settings)
-    report = validate_against_official(con, settings).as_dict()
+    report = asdict(validate_against_official(con, settings))
     out = settings.data_dir / "label_validation.json"
     out.write_text(json.dumps(report, indent=2))
     logging.info("Label validation vs official KKBox labels: %s", report)

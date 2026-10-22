@@ -1,6 +1,7 @@
 """End-to-end smoke test of ingest + labels + cleanup on tiny files shaped like the KKBox data."""
 
 import io
+import zipfile
 from datetime import date
 
 import duckdb
@@ -8,7 +9,8 @@ import py7zr
 import pytest
 
 from churn.config import Settings
-from churn.data.ingest import build_raw_tables, clean_raw
+from churn.data.download import COMPETITION, download
+from churn.data.ingest import build_raw_tables, check_raw_files, clean_raw
 from churn.data.labels import build_labels, validate_against_official
 from churn.data.logs_filter import LineFilter
 
@@ -48,8 +50,7 @@ ARCHIVES = {
 }
 
 
-@pytest.fixture
-def built(tmp_path):
+def write_raw(tmp_path):
     raw = tmp_path / "raw"
     for rel, lines in CSVS.items():
         p = raw / rel
@@ -60,7 +61,12 @@ def built(tmp_path):
         p.parent.mkdir(parents=True, exist_ok=True)
         with py7zr.SevenZipFile(p, "w") as sz:
             sz.writestr("\n".join(lines) + "\n", p.name.removesuffix(".7z"))
-    settings = Settings(data_dir=tmp_path, sample_mod=1, sample_keep=1)  # keep everyone
+    return Settings(data_dir=tmp_path, sample_mod=1, sample_keep=1)  # keep everyone
+
+
+@pytest.fixture
+def built(tmp_path):
+    settings = write_raw(tmp_path)
     with duckdb.connect(str(settings.db_path)) as con:
         build_raw_tables(con, settings)
         build_labels(con, settings)
@@ -97,6 +103,42 @@ def test_clean_raw_refuses_without_database(tmp_path):
     with pytest.raises(RuntimeError):
         clean_raw(Settings(data_dir=tmp_path))
     assert (tmp_path / "raw").exists()
+
+
+def test_missing_march_transactions_is_rejected(tmp_path):
+    settings = write_raw(tmp_path)
+    (settings.raw_dir / "b/transactions_v2.csv").unlink()
+    with pytest.raises(FileNotFoundError, match="transactions_v2"):
+        check_raw_files(settings)
+
+
+def test_unfinished_unpack_is_rejected(tmp_path):
+    settings = write_raw(tmp_path)
+    (settings.raw_dir / "a/transactions.csv.7z").write_bytes(b"")  # archive left = unpack died
+    with pytest.raises(RuntimeError, match=r"transactions\.csv\.7z"):
+        check_raw_files(settings)
+
+
+def test_download_keeps_zip_that_lacks_files(tmp_path):
+    settings = Settings(data_dir=tmp_path)
+    zip_path = settings.raw_dir / f"{COMPETITION}.zip"
+    zip_path.parent.mkdir(parents=True)
+    with zipfile.ZipFile(zip_path, "w") as zf:
+        zf.writestr("train.csv.7z", b"x")
+    with pytest.raises(RuntimeError, match="lacks"):
+        download(settings)
+    assert zip_path.exists()
+    assert not (settings.raw_dir / "train.csv.7z").exists()
+
+
+def test_download_deletes_broken_zip(tmp_path):
+    settings = Settings(data_dir=tmp_path)
+    zip_path = settings.raw_dir / f"{COMPETITION}.zip"
+    zip_path.parent.mkdir(parents=True)
+    zip_path.write_bytes(b"half a download")
+    with pytest.raises(RuntimeError, match="incomplete"):
+        download(settings)
+    assert not zip_path.exists()
 
 
 @pytest.mark.parametrize("chunk_size", [1, 7, 1000])

@@ -1,5 +1,5 @@
-# data & artifacts
-data/
+# data & artifacts (leading slash: only the top-level folder, not src/churn/data/)
+/data/
 mlruns/
 mlartifacts/
 *.duckdb
