@@ -54,6 +54,12 @@ class Settings(BaseSettings):
     # The month for which KKBox ships official labels (train.csv) — used to validate ours.
     official_label_month: str = "2017-02"
 
+    # --- modelling -----------------------------------------------------------------------
+    seed: int = 42
+    # Budgeted LightGBM search: whichever limit is hit first ends the study.
+    optuna_trials: int = 50
+    optuna_timeout_s: int = 1800
+
     @property
     def raw_dir(self) -> Path:
         return self.data_dir / "raw"
@@ -61,6 +67,14 @@ class Settings(BaseSettings):
     @property
     def db_path(self) -> Path:
         return self.data_dir / "churn.duckdb"
+
+    @property
+    def model_dir(self) -> Path:
+        return self.data_dir / "model"
+
+    @property
+    def mlflow_uri(self) -> str:
+        return f"sqlite:///{(self.data_dir / 'mlflow.db').as_posix()}"
 
     @property
     def all_months(self) -> list[str]:

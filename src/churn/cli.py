@@ -45,6 +45,20 @@ def cmd_labels(_: argparse.Namespace) -> None:
         _labels(con)
 
 
+def cmd_features(_: argparse.Namespace) -> None:
+    from churn.features.build import build_features
+
+    settings = get_settings()
+    with duckdb.connect(str(settings.db_path)) as con:
+        build_features(con, settings)
+
+
+def cmd_train(_: argparse.Namespace) -> None:
+    from churn.models.train import train
+
+    train(get_settings())
+
+
 def cmd_clean_raw(_: argparse.Namespace) -> None:
     from churn.data.ingest import clean_raw
 
@@ -58,6 +72,8 @@ def main() -> None:
     sub.add_parser("download", help="Download + extract KKBox data").set_defaults(func=cmd_download)
     sub.add_parser("data", help="Build sampled tables + labels").set_defaults(func=cmd_data)
     sub.add_parser("labels", help="Rebuild labels from DuckDB only").set_defaults(func=cmd_labels)
+    sub.add_parser("features", help="Build the feature table").set_defaults(func=cmd_features)
+    sub.add_parser("train", help="Train, tune, calibrate, evaluate").set_defaults(func=cmd_train)
     sub.add_parser(
         "clean-raw", help="Delete data/raw after verifying the DuckDB tables"
     ).set_defaults(func=cmd_clean_raw)
