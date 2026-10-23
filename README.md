@@ -4,7 +4,7 @@
 answers three questions: *who is about to leave, why, and who is worth spending money on to
 keep?*
 
-**[▶ Try the live app](LIVE_APP_URL)** · the live app uses *synthetic* customers, see
+**[▶ Try the live app](https://churn-intelligence-platform-4dgea95k9yckwjycdlhqge.streamlit.app/)** · the live app uses *synthetic* customers, see
 [why](#about-the-live-app)
 
 ![A short tour of the app](docs/images/app_tour.gif)
