@@ -73,8 +73,15 @@ test_metrics = summary["metrics"]["metrics"]
 st.title("Churn Intelligence")
 st.caption(
     f"KKBox music subscriptions · test month {cfg['test_month']} · "
-    f"{cfg['bundle_customers']:,} sampled customers of {cfg['test_customers']:,} in the "
-    f"{cfg['sample_share_of_kkbox_users']:.0%} sample"
+    f"{cfg['bundle_customers']:,} synthetic customers modelled on {cfg['test_customers']:,} "
+    f"real ones in the {cfg['sample_share_of_kkbox_users']:.0%} sample"
+)
+st.info(
+    "**The customers in this demo are synthetic.** KKBox's competition data may not be "
+    "republished, so the customer lists are generated to look like the real test month, and "
+    "their outcomes are drawn from the model's own probabilities. The headline numbers, "
+    "charts and model card come from the real data.",
+    icon="ℹ️",
 )
 overview, explorer, simulator, card = st.tabs(
     ["Overview", "Risk explorer", "Campaign simulator", "Model card"]
@@ -171,7 +178,7 @@ with explorer:
                 FEATURES_SHOWN["minutes_30d"], format="%.0f"
             ),
             "is_churn": st.column_config.CheckboxColumn(
-                "Churned (actual)", help="What really happened in the test month."
+                "Churned", help="Synthetic outcome, drawn from the model's probability."
             ),
         },
         hide_index=True,
@@ -226,9 +233,9 @@ with simulator:
         "whose churn probability is above the **break-even** point, up to your budget."
     )
     st.caption(
-        f"Computed live on the {len(customers):,}-customer sample, so the default plan's "
+        f"Computed live on the {len(customers):,} synthetic customers, so the default plan's "
         f"savings differ slightly from the Overview figure for all {cfg['test_customers']:,} "
-        "test customers."
+        "real test customers."
     )
     s1, s2, s3, s4 = st.columns(4)
     cost = s1.slider("Cost per contact (NTD)", 5, 300, _clamp(int(cfg["contact_cost"]), 5, 300), 5)
@@ -256,10 +263,11 @@ with simulator:
     m3.metric("Expected net savings", f"{expected[k] * per:,.0f} NTD",
               help="Per 1,000 customers, using the model's probabilities.")  # fmt: skip
     m4.metric(
-        "What actually happened",
+        "Simulated outcome",
         f"{realised[k] * per:,.0f} NTD",
         delta=f"{(realised[k] - expected[k]) * per:+,.0f} vs expected",
-        help="Per 1,000 customers, using the real test-month outcomes.",
+        help="Per 1,000 customers, using the synthetic customers' drawn outcomes: chance "
+        "variation around the expected figure, not a check of the model.",
     )
 
     # show where decisions happen: up to 40% contacted, or twice the plan if that is larger

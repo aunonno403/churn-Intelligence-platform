@@ -1,7 +1,5 @@
 # data & artifacts (leading slash: only the top-level folder, not src/churn/data/)
 /data/
-# Sample of KKBox competition data: check the competition's data rules before publishing it.
-/app/bundle/
 mlruns/
 mlartifacts/
 *.duckdb

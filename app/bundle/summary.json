@@ -1,0 +1,2448 @@
+{
+  "metrics": {
+    "run_id": "c85e117bdbd244f0a4ac0252b52f2e9a",
+    "rows": {
+      "train": 325537,
+      "valid": 88473,
+      "test": 88109
+    },
+    "lightgbm_params": {
+      "learning_rate": 0.023732982784234056,
+      "num_leaves": 57,
+      "min_child_samples": 38,
+      "subsample": 0.91471247617364,
+      "colsample_bytree": 0.44971754460595903,
+      "reg_lambda": 0.013192426130018886,
+      "subsample_freq": 1,
+      "n_estimators": 342
+    },
+    "metrics": {
+      "majority": {
+        "valid": {
+          "pr_auc": 0.08021656324528387,
+          "roc_auc": 0.5,
+          "brier": 0.0746848821111047,
+          "lift_10": 1.0,
+          "lift_20": 1.0,
+          "churn_rate": 0.08021656324528387,
+          "mean_predicted": 0.050166340538863485
+        },
+        "test": {
+          "pr_auc": 0.039473833547083725,
+          "roc_auc": 0.5,
+          "brier": 0.038029979717950115,
+          "lift_10": 1.0,
+          "lift_20": 1.0,
+          "churn_rate": 0.039473833547083725,
+          "mean_predicted": 0.05016634053886348
+        }
+      },
+      "logistic": {
+        "valid": {
+          "pr_auc": 0.618648463332083,
+          "roc_auc": 0.8017887763398944,
+          "brier": 0.04424399230220833,
+          "lift_10": 6.228899869440288,
+          "lift_20": 3.4894237256364726,
+          "churn_rate": 0.08021656324528387,
+          "mean_predicted": 0.06775715580092916
+        },
+        "test": {
+          "pr_auc": 0.3820855526170061,
+          "roc_auc": 0.8654896792461193,
+          "brier": 0.029676890549816225,
+          "lift_10": 6.828559646513269,
+          "lift_20": 3.9116864838237064,
+          "churn_rate": 0.039473833547083725,
+          "mean_predicted": 0.043021250726325684
+        }
+      },
+      "lightgbm": {
+        "valid": {
+          "pr_auc": 0.6306771764609825,
+          "roc_auc": 0.7603781907302609,
+          "brier": 0.04249069799275873,
+          "lift_10": 6.348659310494897,
+          "lift_20": 3.519013024339629,
+          "churn_rate": 0.08021656324528387,
+          "mean_predicted": 0.0632117819483518
+        },
+        "test": {
+          "pr_auc": 0.4461840852352055,
+          "roc_auc": 0.8710507487468396,
+          "brier": 0.027960113062445422,
+          "lift_10": 6.9953202610386445,
+          "lift_20": 3.970627735509399,
+          "churn_rate": 0.039473833547083725,
+          "mean_predicted": 0.037938625537905474
+        }
+      },
+      "lightgbm_calibrated": {
+        "valid": {
+          "pr_auc": 0.6256720449040856,
+          "roc_auc": 0.7599617268483007,
+          "brier": 0.04254773318090449,
+          "lift_10": 6.352886114296823,
+          "lift_20": 3.516194995891709,
+          "churn_rate": 0.08021656324528387,
+          "mean_predicted": 0.06386205690509461
+        },
+        "test": {
+          "pr_auc": 0.43535012339869034,
+          "roc_auc": 0.8706112787747402,
+          "brier": 0.027999646875982682,
+          "lift_10": 7.0010706270567615,
+          "lift_20": 3.9720653270139286,
+          "churn_rate": 0.039473833547083725,
+          "mean_predicted": 0.038147132831035054
+        }
+      }
+    }
+  },
+  "economics": {
+    "assumptions": {
+      "contact_cost": 50.0,
+      "success_rate": 0.2,
+      "customer_value": 1788.0
+    },
+    "break_even_probability": 0.13982102908277405,
+    "rule": "contact every customer whose churn probability >= break-even",
+    "rule_contact_share": 0.07199037555754803,
+    "rule_net_savings_per_1000": 5252.30793675987,
+    "best_possible_contact_share": 0.07391980387928589,
+    "best_possible_net_savings_per_1000": 5269.477578907657,
+    "contact_top_10pct_net_savings_per_1000": 4874.539490857568,
+    "contact_everyone_net_savings_per_1000": -35884.157123562894,
+    "rule_contact_share_if_churn_half": 0.03303862261516985,
+    "rule_expected_savings_per_1000_if_churn_half": 1721.981077833302,
+    "test_customers": 88109,
+    "test_churn_rate": 0.039473833547083725
+  },
+  "drivers": [
+    {
+      "feature": "last_payment_method",
+      "rule": "last_payment_method not in ['14', '18', '23', '31', '34', '37', '41']",
+      "share_of_customers": 0.2886992248237978,
+      "churn_rate_in_group": 0.1110980068404293,
+      "churn_rate_rest": 0.010403369925963748,
+      "risk_ratio": 10.679040313962247,
+      "sentence": "Customers with last_payment_method not in ['14', '18', '23', '31', '34', '37', '41'] (29% of customers) churn at 11.1% vs 1.0% for everyone else: 10.7x the risk.",
+      "mean_abs_shap": 0.3679186766198668
+    },
+    {
+      "feature": "last_auto_renew",
+      "rule": "last_auto_renew <= 0",
+      "share_of_customers": 0.1179448183499983,
+      "churn_rate_in_group": 0.21478060046189376,
+      "churn_rate_rest": 0.01603252827566684,
+      "risk_ratio": 13.39655210762199,
+      "sentence": "Customers with last_auto_renew <= 0 (12% of customers) churn at 21.5% vs 1.6% for everyone else: 13.4x the risk.",
+      "mean_abs_shap": 0.366695599224968
+    },
+    {
+      "feature": "last_list_price",
+      "rule": "last_list_price > 99",
+      "share_of_customers": 0.5627347944023879,
+      "churn_rate_in_group": 0.060768020652656206,
+      "churn_rate_rest": 0.012069457782853583,
+      "risk_ratio": 5.034859207924486,
+      "sentence": "Customers with last_list_price > 99 (56% of customers) churn at 6.1% vs 1.2% for everyone else: 5.0x the risk.",
+      "mean_abs_shap": 0.3064213609341809
+    },
+    {
+      "feature": "days_since_last_tx",
+      "rule": "days_since_last_tx <= 15",
+      "share_of_customers": 0.4736406042515521,
+      "churn_rate_in_group": 0.03500910572222755,
+      "churn_rate_rest": 0.04349138581624512,
+      "risk_ratio": 0.8049664333563445,
+      "sentence": "Customers with days_since_last_tx <= 15 (47% of customers) churn at 3.5% vs 4.3% for everyone else: 0.8x the risk. The model only treats this as risky in combination with other features; on its own the group is not riskier.",
+      "mean_abs_shap": 0.23534895918660773
+    },
+    {
+      "feature": "last_amount_paid",
+      "rule": "last_amount_paid > 99",
+      "share_of_customers": 0.5597952536063285,
+      "churn_rate_in_group": 0.059627354378281934,
+      "churn_rate_rest": 0.013845201876965916,
+      "risk_ratio": 4.30671613950846,
+      "sentence": "Customers with last_amount_paid > 99 (56% of customers) churn at 6.0% vs 1.4% for everyone else: 4.3x the risk.",
+      "mean_abs_shap": 0.1962402690049187
+    }
+  ],
+  "uplift": {
+    "treatment": "Womens E-Mail vs No E-Mail",
+    "outcome": "visit",
+    "test_customers_per_split": 12808,
+    "splits": 5,
+    "average_uplift_pp": 4.51138658360357,
+    "budget_share": 0.3,
+    "extra_visits_per_1000_at_budget": {
+      "uplift (X-learner)": {
+        "mean": 23.42893924884234,
+        "min": 22.005985297580253,
+        "max": 24.911350316192642
+      },
+      "uplift (T-learner)": {
+        "mean": 22.78311876998378,
+        "min": 18.5697055062292,
+        "max": 25.334187631537173
+      },
+      "highest risk": {
+        "mean": 15.503887007511588,
+        "min": 13.888438373369388,
+        "max": 18.223005869297424
+      }
+    },
+    "random_targeting_at_budget_split0": 13.53415975081071,
+    "qini_coefficient_mean": {
+      "uplift (X-learner)": 0.003611131432230846,
+      "uplift (T-learner)": 0.003281813946684939,
+      "highest risk": 0.00031500257880740835
+    },
+    "observed_uplift_pp_by_fifth_split0": {
+      "uplift (X-learner)": [
+        {
+          "uplift": 7.265715650808817,
+          "ci95": 2.7382349096368626
+        },
+        {
+          "uplift": 6.454377496478339,
+          "ci95": 2.6139095455082613
+        },
+        {
+          "uplift": 3.2131911234406814,
+          "ci95": 2.699068758259912
+        },
+        {
+          "uplift": 3.0727981126505597,
+          "ci95": 2.343335583219623
+        },
+        {
+          "uplift": 2.4897540983606565,
+          "ci95": 2.5034387768036708
+        }
+      ],
+      "highest risk": [
+        {
+          "uplift": 6.650446857371318,
+          "ci95": 1.9485788207085741
+        },
+        {
+          "uplift": 4.128381380263167,
+          "ci95": 2.258692355703773
+        },
+        {
+          "uplift": 2.2356692867312913,
+          "ci95": 2.5871794936353467
+        },
+        {
+          "uplift": 3.8263065436978465,
+          "ci95": 2.8446449498797466
+        },
+        {
+          "uplift": 5.932300589093714,
+          "ci95": 3.0382462983427345
+        }
+      ]
+    },
+    "segments_split0": {
+      "persuadable": {
+        "share": 0.7654590880699563,
+        "observed_uplift_pp": 5.013719057212872,
+        "ci95_pp": 1.3365264174859468
+      },
+      "sleeping dog": {
+        "share": 0.09642410993129294,
+        "observed_uplift_pp": 1.8422241127600798,
+        "ci95_pp": 3.6941051548101234
+      },
+      "sure thing": {
+        "share": 0.07112742036227358,
+        "observed_uplift_pp": 1.7368752726743901,
+        "ci95_pp": 4.774245581317463
+      },
+      "lost cause": {
+        "share": 0.0669893816364772,
+        "observed_uplift_pp": 4.459271191606078,
+        "ci95_pp": 3.253333433846272
+      }
+    },
+    "segment_rule": "persuadable / sleeping dog: predicted uplift above +/-1%; otherwise sure thing / lost cause by P(visit without e-mail) above / below median"
+  },
+  "churn_by_cohort": [
+    {
+      "cohort": "2016-07",
+      "split": "train",
+      "customers": 76896,
+      "churn_rate": 0.05642686225551394
+    },
+    {
+      "cohort": "2016-08",
+      "split": "train",
+      "customers": 80188,
+      "churn_rate": 0.04292412829849853
+    },
+    {
+      "cohort": "2016-09",
+      "split": "train",
+      "customers": 84727,
+      "churn_rate": 0.06356887414873653
+    },
+    {
+      "cohort": "2016-10",
+      "split": "train",
+      "customers": 83726,
+      "churn_rate": 0.03778993383178463
+    },
+    {
+      "cohort": "2016-12",
+      "split": "valid",
+      "customers": 88473,
+      "churn_rate": 0.08021656324528387
+    },
+    {
+      "cohort": "2017-02",
+      "split": "test",
+      "customers": 88109,
+      "churn_rate": 0.039473833547083725
+    }
+  ],
+  "retention": [
+    {
+      "cohort": "2015-02",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 1,
+      "retained": 0.99625,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 2,
+      "retained": 0.8564583333333333,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 3,
+      "retained": 0.810625,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 4,
+      "retained": 0.82,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 5,
+      "retained": 0.7616666666666667,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 6,
+      "retained": 0.7458333333333333,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 7,
+      "retained": 0.7222916666666667,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 8,
+      "retained": 0.6883333333333334,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 9,
+      "retained": 0.6752083333333333,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 10,
+      "retained": 0.665625,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 11,
+      "retained": 0.6520833333333333,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 12,
+      "retained": 0.653125,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 13,
+      "retained": 0.6302083333333334,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 14,
+      "retained": 0.55,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 15,
+      "retained": 0.5189583333333333,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 16,
+      "retained": 0.499375,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 17,
+      "retained": 0.52875,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 18,
+      "retained": 0.5370833333333334,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 19,
+      "retained": 0.5325,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 20,
+      "retained": 0.5333333333333333,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 21,
+      "retained": 0.5320833333333334,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 22,
+      "retained": 0.5041666666666667,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 23,
+      "retained": 0.50125,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 24,
+      "retained": 0.493125,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-02",
+      "months_since": 25,
+      "retained": 0.4895833333333333,
+      "cohort_size": 4800
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 1,
+      "retained": 0.9953727073868417,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 2,
+      "retained": 0.3286219081272085,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 3,
+      "retained": 0.8843176846710415,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 4,
+      "retained": 0.8622749453138145,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 5,
+      "retained": 0.8478041393235739,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 6,
+      "retained": 0.839811542991755,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 7,
+      "retained": 0.8157496214033316,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 8,
+      "retained": 0.8039710583880195,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 9,
+      "retained": 0.7921924953727074,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 10,
+      "retained": 0.7820965842167256,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 11,
+      "retained": 0.7758707723372035,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 12,
+      "retained": 0.7637556789500253,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 13,
+      "retained": 0.7352347299343766,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 14,
+      "retained": 0.7112569409389198,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 15,
+      "retained": 0.6919064445566212,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 16,
+      "retained": 0.6989735823658085,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 17,
+      "retained": 0.6969544001346122,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 18,
+      "retained": 0.693168433451119,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 19,
+      "retained": 0.6857647652700656,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 20,
+      "retained": 0.6859330304559986,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 21,
+      "retained": 0.665572942958102,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 22,
+      "retained": 0.6588423355207808,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 23,
+      "retained": 0.6515227999326939,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-03",
+      "months_since": 24,
+      "retained": 0.6455493858320713,
+      "cohort_size": 11886
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 1,
+      "retained": 0.9905330314879605,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 2,
+      "retained": 0.7705289154146944,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 3,
+      "retained": 0.7110516567194896,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 4,
+      "retained": 0.6793578925704877,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 5,
+      "retained": 0.6526034163408109,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 6,
+      "retained": 0.6289359950607121,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 7,
+      "retained": 0.5641078411195719,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 8,
+      "retained": 0.5497015846882074,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 9,
+      "retained": 0.5324140769705701,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 10,
+      "retained": 0.529327022020992,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 11,
+      "retained": 0.5566989092405845,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 12,
+      "retained": 0.5346779172669274,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 13,
+      "retained": 0.5003087054949578,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 14,
+      "retained": 0.48302119777732044,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 15,
+      "retained": 0.47746449886807985,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 16,
+      "retained": 0.47725869520477465,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 17,
+      "retained": 0.476641284214859,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 18,
+      "retained": 0.4381559991767853,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 19,
+      "retained": 0.44412430541263637,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 20,
+      "retained": 0.45667832887425397,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 21,
+      "retained": 0.452768059271455,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 22,
+      "retained": 0.41181313027371885,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-04",
+      "months_since": 23,
+      "retained": 0.4076970570076147,
+      "cohort_size": 4859
+    },
+    {
+      "cohort": "2015-05",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 4457
+    },
+    {
+      "cohort": "2015-05",
+      "months_since": 1,
+      "retained": 0.9885573255553063,
+      "cohort_size": 4457
+    },
+    {
+      "cohort": "2015-05",
+      "months_since": 2,
+      "retained": 0.7067534215840251,
+      "cohort_size": 4457
+    },
+    {
+      "cohort": "2015-05",
+      "months_since": 3,
+      "retained": 0.6641238501234014,
+      "cohort_size": 4457
+    },
+    {
+      "cohort": "2015-05",
+      "months_since": 4,
+      "retained": 0.6383217410814449,
+      "cohort_size": 4457
+    },
+    {
+      "cohort": "2015-05",
+      "months_since": 5,
+      "retained": 0.6181287861790442,
+      "cohort_size": 4457
+    },
+    {
+      "cohort": "2015-05",
+      "months_since": 6,
+      "retained": 0.6174556876822975,
+      "cohort_size": 4457
+    },
+    {
+      "cohort": "2015-05",
+      "months_since": 7,
+      "retained": 0.5786403410365717,
+      "cohort_size": 4457
+    },
+    {
+      "cohort": "2015-05",
+      "months_since": 8,
+      "retained": 0.5523894996634507,
+      "cohort_size": 4457
+    },
+    {
+      "cohort": "2015-05",
+      "months_since": 9,
+      "retained": 0.5523894996634507,
+      "cohort_size": 4457
+    },
+    {
+      "cohort": "2015-05",
+      "months_since": 10,
+      "retained": 0.5391518958940992,
+      "cohort_size": 4457
+    },
+    {
+      "cohort": "2015-05",
+      "months_since": 11,
+      "retained": 0.5070675342158403,
+      "cohort_size": 4457
+    },
+    {
+      "cohort": "2015-05",
+      "months_since": 12,
+      "retained": 0.5050482387256002,
+      "cohort_size": 4457
+    },
+    {
+      "cohort": "2015-05",
+      "months_since": 13,
+      "retained": 0.4933811981153242,
+      "cohort_size": 4457
+    },
+    {
+      "cohort": "2015-05",
+      "months_since": 14,
+      "retained": 0.4799192281803904,
+      "cohort_size": 4457
+    },
+    {
+      "cohort": "2015-05",
+      "months_since": 15,
+      "retained": 0.4583800762844963,
+      "cohort_size": 4457
+    },
+    {
+      "cohort": "2015-05",
+      "months_since": 16,
+      "retained": 0.4547902176351806,
+      "cohort_size": 4457
+    },
+    {
+      "cohort": "2015-05",
+      "months_since": 17,
+      "retained": 0.45299528831052277,
+      "cohort_size": 4457
+    },
+    {
+      "cohort": "2015-05",
+      "months_since": 18,
+      "retained": 0.46107247027148307,
+      "cohort_size": 4457
+    },
+    {
+      "cohort": "2015-05",
+      "months_since": 19,
+      "retained": 0.43863585371326,
+      "cohort_size": 4457
+    },
+    {
+      "cohort": "2015-05",
+      "months_since": 20,
+      "retained": 0.4316805025802109,
+      "cohort_size": 4457
+    },
+    {
+      "cohort": "2015-05",
+      "months_since": 21,
+      "retained": 0.42382768678483285,
+      "cohort_size": 4457
+    },
+    {
+      "cohort": "2015-05",
+      "months_since": 22,
+      "retained": 0.4229302221225039,
+      "cohort_size": 4457
+    },
+    {
+      "cohort": "2015-06",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 17989
+    },
+    {
+      "cohort": "2015-06",
+      "months_since": 1,
+      "retained": 0.2292512090722108,
+      "cohort_size": 17989
+    },
+    {
+      "cohort": "2015-06",
+      "months_since": 2,
+      "retained": 0.18038801489799322,
+      "cohort_size": 17989
+    },
+    {
+      "cohort": "2015-06",
+      "months_since": 3,
+      "retained": 0.17872032908999944,
+      "cohort_size": 17989
+    },
+    {
+      "cohort": "2015-06",
+      "months_since": 4,
+      "retained": 0.1706598476846962,
+      "cohort_size": 17989
+    },
+    {
+      "cohort": "2015-06",
+      "months_since": 5,
+      "retained": 0.16365556729112235,
+      "cohort_size": 17989
+    },
+    {
+      "cohort": "2015-06",
+      "months_since": 6,
+      "retained": 0.16443382066818613,
+      "cohort_size": 17989
+    },
+    {
+      "cohort": "2015-06",
+      "months_since": 7,
+      "retained": 0.15909722608260604,
+      "cohort_size": 17989
+    },
+    {
+      "cohort": "2015-06",
+      "months_since": 8,
+      "retained": 0.157763077436211,
+      "cohort_size": 17989
+    },
+    {
+      "cohort": "2015-06",
+      "months_since": 9,
+      "retained": 0.15826338317860916,
+      "cohort_size": 17989
+    },
+    {
+      "cohort": "2015-06",
+      "months_since": 10,
+      "retained": 0.14792373116904775,
+      "cohort_size": 17989
+    },
+    {
+      "cohort": "2015-06",
+      "months_since": 11,
+      "retained": 0.14653399299571962,
+      "cohort_size": 17989
+    },
+    {
+      "cohort": "2015-06",
+      "months_since": 12,
+      "retained": 0.14797932069598088,
+      "cohort_size": 17989
+    },
+    {
+      "cohort": "2015-06",
+      "months_since": 13,
+      "retained": 0.15654010784368225,
+      "cohort_size": 17989
+    },
+    {
+      "cohort": "2015-06",
+      "months_since": 14,
+      "retained": 0.15036967035410528,
+      "cohort_size": 17989
+    },
+    {
+      "cohort": "2015-06",
+      "months_since": 15,
+      "retained": 0.14814608927678025,
+      "cohort_size": 17989
+    },
+    {
+      "cohort": "2015-06",
+      "months_since": 16,
+      "retained": 0.14981377508477403,
+      "cohort_size": 17989
+    },
+    {
+      "cohort": "2015-06",
+      "months_since": 17,
+      "retained": 0.16732447606870865,
+      "cohort_size": 17989
+    },
+    {
+      "cohort": "2015-06",
+      "months_since": 18,
+      "retained": 0.14809049974984712,
+      "cohort_size": 17989
+    },
+    {
+      "cohort": "2015-06",
+      "months_since": 19,
+      "retained": 0.14625604536105397,
+      "cohort_size": 17989
+    },
+    {
+      "cohort": "2015-06",
+      "months_since": 20,
+      "retained": 0.1398632497637445,
+      "cohort_size": 17989
+    },
+    {
+      "cohort": "2015-06",
+      "months_since": 21,
+      "retained": 0.13819556395575075,
+      "cohort_size": 17989
+    },
+    {
+      "cohort": "2015-07",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 6083
+    },
+    {
+      "cohort": "2015-07",
+      "months_since": 1,
+      "retained": 0.9957257931941477,
+      "cohort_size": 6083
+    },
+    {
+      "cohort": "2015-07",
+      "months_since": 2,
+      "retained": 0.7698504027617952,
+      "cohort_size": 6083
+    },
+    {
+      "cohort": "2015-07",
+      "months_since": 3,
+      "retained": 0.6763110307414105,
+      "cohort_size": 6083
+    },
+    {
+      "cohort": "2015-07",
+      "months_since": 4,
+      "retained": 0.7050797303961861,
+      "cohort_size": 6083
+    },
+    {
+      "cohort": "2015-07",
+      "months_since": 5,
+      "retained": 0.6950517836593786,
+      "cohort_size": 6083
+    },
+    {
+      "cohort": "2015-07",
+      "months_since": 6,
+      "retained": 0.6832155186585567,
+      "cohort_size": 6083
+    },
+    {
+      "cohort": "2015-07",
+      "months_since": 7,
+      "retained": 0.6708860759493671,
+      "cohort_size": 6083
+    },
+    {
+      "cohort": "2015-07",
+      "months_since": 8,
+      "retained": 0.6547756041426928,
+      "cohort_size": 6083
+    },
+    {
+      "cohort": "2015-07",
+      "months_since": 9,
+      "retained": 0.629787933585402,
+      "cohort_size": 6083
+    },
+    {
+      "cohort": "2015-07",
+      "months_since": 10,
+      "retained": 0.6304455038632254,
+      "cohort_size": 6083
+    },
+    {
+      "cohort": "2015-07",
+      "months_since": 11,
+      "retained": 0.6228834456682558,
+      "cohort_size": 6083
+    },
+    {
+      "cohort": "2015-07",
+      "months_since": 12,
+      "retained": 0.6319250369883281,
+      "cohort_size": 6083
+    },
+    {
+      "cohort": "2015-07",
+      "months_since": 13,
+      "retained": 0.6286371855992109,
+      "cohort_size": 6083
+    },
+    {
+      "cohort": "2015-07",
+      "months_since": 14,
+      "retained": 0.6084168995561401,
+      "cohort_size": 6083
+    },
+    {
+      "cohort": "2015-07",
+      "months_since": 15,
+      "retained": 0.5977313825415091,
+      "cohort_size": 6083
+    },
+    {
+      "cohort": "2015-07",
+      "months_since": 16,
+      "retained": 0.6031563373335526,
+      "cohort_size": 6083
+    },
+    {
+      "cohort": "2015-07",
+      "months_since": 17,
+      "retained": 0.590826894624363,
+      "cohort_size": 6083
+    },
+    {
+      "cohort": "2015-07",
+      "months_since": 18,
+      "retained": 0.5804701627486437,
+      "cohort_size": 6083
+    },
+    {
+      "cohort": "2015-07",
+      "months_since": 19,
+      "retained": 0.5742232451093211,
+      "cohort_size": 6083
+    },
+    {
+      "cohort": "2015-07",
+      "months_since": 20,
+      "retained": 0.567318757192175,
+      "cohort_size": 6083
+    },
+    {
+      "cohort": "2015-08",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 7213
+    },
+    {
+      "cohort": "2015-08",
+      "months_since": 1,
+      "retained": 0.9902953001525024,
+      "cohort_size": 7213
+    },
+    {
+      "cohort": "2015-08",
+      "months_since": 2,
+      "retained": 0.6436988770275891,
+      "cohort_size": 7213
+    },
+    {
+      "cohort": "2015-08",
+      "months_since": 3,
+      "retained": 0.6554831554138362,
+      "cohort_size": 7213
+    },
+    {
+      "cohort": "2015-08",
+      "months_since": 4,
+      "retained": 0.6403715513655899,
+      "cohort_size": 7213
+    },
+    {
+      "cohort": "2015-08",
+      "months_since": 5,
+      "retained": 0.6169416331623457,
+      "cohort_size": 7213
+    },
+    {
+      "cohort": "2015-08",
+      "months_since": 6,
+      "retained": 0.6144461389158464,
+      "cohort_size": 7213
+    },
+    {
+      "cohort": "2015-08",
+      "months_since": 7,
+      "retained": 0.5946208235131013,
+      "cohort_size": 7213
+    },
+    {
+      "cohort": "2015-08",
+      "months_since": 8,
+      "retained": 0.5650908082628587,
+      "cohort_size": 7213
+    },
+    {
+      "cohort": "2015-08",
+      "months_since": 9,
+      "retained": 0.5627339525856093,
+      "cohort_size": 7213
+    },
+    {
+      "cohort": "2015-08",
+      "months_since": 10,
+      "retained": 0.5509496741993622,
+      "cohort_size": 7213
+    },
+    {
+      "cohort": "2015-08",
+      "months_since": 11,
+      "retained": 0.5700817967558575,
+      "cohort_size": 7213
+    },
+    {
+      "cohort": "2015-08",
+      "months_since": 12,
+      "retained": 0.5741023152641065,
+      "cohort_size": 7213
+    },
+    {
+      "cohort": "2015-08",
+      "months_since": 13,
+      "retained": 0.5661999168168584,
+      "cohort_size": 7213
+    },
+    {
+      "cohort": "2015-08",
+      "months_since": 14,
+      "retained": 0.5517815056148621,
+      "cohort_size": 7213
+    },
+    {
+      "cohort": "2015-08",
+      "months_since": 15,
+      "retained": 0.5603770969083599,
+      "cohort_size": 7213
+    },
+    {
+      "cohort": "2015-08",
+      "months_since": 16,
+      "retained": 0.5456814085678636,
+      "cohort_size": 7213
+    },
+    {
+      "cohort": "2015-08",
+      "months_since": 17,
+      "retained": 0.5266879245806183,
+      "cohort_size": 7213
+    },
+    {
+      "cohort": "2015-08",
+      "months_since": 18,
+      "retained": 0.5218355746568696,
+      "cohort_size": 7213
+    },
+    {
+      "cohort": "2015-08",
+      "months_since": 19,
+      "retained": 0.515874116179121,
+      "cohort_size": 7213
+    },
+    {
+      "cohort": "2015-09",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 7126
+    },
+    {
+      "cohort": "2015-09",
+      "months_since": 1,
+      "retained": 0.9914397979230986,
+      "cohort_size": 7126
+    },
+    {
+      "cohort": "2015-09",
+      "months_since": 2,
+      "retained": 0.6699410609037328,
+      "cohort_size": 7126
+    },
+    {
+      "cohort": "2015-09",
+      "months_since": 3,
+      "retained": 0.6451024417625596,
+      "cohort_size": 7126
+    },
+    {
+      "cohort": "2015-09",
+      "months_since": 4,
+      "retained": 0.6152119000841987,
+      "cohort_size": 7126
+    },
+    {
+      "cohort": "2015-09",
+      "months_since": 5,
+      "retained": 0.6053887173730003,
+      "cohort_size": 7126
+    },
+    {
+      "cohort": "2015-09",
+      "months_since": 6,
+      "retained": 0.5885489755823744,
+      "cohort_size": 7126
+    },
+    {
+      "cohort": "2015-09",
+      "months_since": 7,
+      "retained": 0.550098231827112,
+      "cohort_size": 7126
+    },
+    {
+      "cohort": "2015-09",
+      "months_since": 8,
+      "retained": 0.5383104125736738,
+      "cohort_size": 7126
+    },
+    {
+      "cohort": "2015-09",
+      "months_since": 9,
+      "retained": 0.5322761717653662,
+      "cohort_size": 7126
+    },
+    {
+      "cohort": "2015-09",
+      "months_since": 10,
+      "retained": 0.5426606792029189,
+      "cohort_size": 7126
+    },
+    {
+      "cohort": "2015-09",
+      "months_since": 11,
+      "retained": 0.5460286275610441,
+      "cohort_size": 7126
+    },
+    {
+      "cohort": "2015-09",
+      "months_since": 12,
+      "retained": 0.5458882963794555,
+      "cohort_size": 7126
+    },
+    {
+      "cohort": "2015-09",
+      "months_since": 13,
+      "retained": 0.5409767050238563,
+      "cohort_size": 7126
+    },
+    {
+      "cohort": "2015-09",
+      "months_since": 14,
+      "retained": 0.5314341846758349,
+      "cohort_size": 7126
+    },
+    {
+      "cohort": "2015-09",
+      "months_since": 15,
+      "retained": 0.5096828515296099,
+      "cohort_size": 7126
+    },
+    {
+      "cohort": "2015-09",
+      "months_since": 16,
+      "retained": 0.5064552343530733,
+      "cohort_size": 7126
+    },
+    {
+      "cohort": "2015-09",
+      "months_since": 17,
+      "retained": 0.49957900645523434,
+      "cohort_size": 7126
+    },
+    {
+      "cohort": "2015-09",
+      "months_since": 18,
+      "retained": 0.49270277855739547,
+      "cohort_size": 7126
+    },
+    {
+      "cohort": "2015-10",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 8666
+    },
+    {
+      "cohort": "2015-10",
+      "months_since": 1,
+      "retained": 0.9885760443111008,
+      "cohort_size": 8666
+    },
+    {
+      "cohort": "2015-10",
+      "months_since": 2,
+      "retained": 0.6722824832679437,
+      "cohort_size": 8666
+    },
+    {
+      "cohort": "2015-10",
+      "months_since": 3,
+      "retained": 0.6360489268405262,
+      "cohort_size": 8666
+    },
+    {
+      "cohort": "2015-10",
+      "months_since": 4,
+      "retained": 0.6230094622663281,
+      "cohort_size": 8666
+    },
+    {
+      "cohort": "2015-10",
+      "months_since": 5,
+      "retained": 0.6074313408723748,
+      "cohort_size": 8666
+    },
+    {
+      "cohort": "2015-10",
+      "months_since": 6,
+      "retained": 0.5876990537733672,
+      "cohort_size": 8666
+    },
+    {
+      "cohort": "2015-10",
+      "months_since": 7,
+      "retained": 0.5756981306254327,
+      "cohort_size": 8666
+    },
+    {
+      "cohort": "2015-10",
+      "months_since": 8,
+      "retained": 0.5641587814447265,
+      "cohort_size": 8666
+    },
+    {
+      "cohort": "2015-10",
+      "months_since": 9,
+      "retained": 0.5702746365105008,
+      "cohort_size": 8666
+    },
+    {
+      "cohort": "2015-10",
+      "months_since": 10,
+      "retained": 0.5688899146088161,
+      "cohort_size": 8666
+    },
+    {
+      "cohort": "2015-10",
+      "months_since": 11,
+      "retained": 0.5685437341333949,
+      "cohort_size": 8666
+    },
+    {
+      "cohort": "2015-10",
+      "months_since": 12,
+      "retained": 0.568774521117009,
+      "cohort_size": 8666
+    },
+    {
+      "cohort": "2015-10",
+      "months_since": 13,
+      "retained": 0.5660050773136395,
+      "cohort_size": 8666
+    },
+    {
+      "cohort": "2015-10",
+      "months_since": 14,
+      "retained": 0.5429263789522271,
+      "cohort_size": 8666
+    },
+    {
+      "cohort": "2015-10",
+      "months_since": 15,
+      "retained": 0.531617816755135,
+      "cohort_size": 8666
+    },
+    {
+      "cohort": "2015-10",
+      "months_since": 16,
+      "retained": 0.5253865681975537,
+      "cohort_size": 8666
+    },
+    {
+      "cohort": "2015-10",
+      "months_since": 17,
+      "retained": 0.5215785829679206,
+      "cohort_size": 8666
+    },
+    {
+      "cohort": "2015-11",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 9746
+    },
+    {
+      "cohort": "2015-11",
+      "months_since": 1,
+      "retained": 0.9814282782680074,
+      "cohort_size": 9746
+    },
+    {
+      "cohort": "2015-11",
+      "months_since": 2,
+      "retained": 0.5768520418633285,
+      "cohort_size": 9746
+    },
+    {
+      "cohort": "2015-11",
+      "months_since": 3,
+      "retained": 0.5512004925097476,
+      "cohort_size": 9746
+    },
+    {
+      "cohort": "2015-11",
+      "months_since": 4,
+      "retained": 0.5276010671044531,
+      "cohort_size": 9746
+    },
+    {
+      "cohort": "2015-11",
+      "months_since": 5,
+      "retained": 0.49897393802585677,
+      "cohort_size": 9746
+    },
+    {
+      "cohort": "2015-11",
+      "months_since": 6,
+      "retained": 0.4926123537861687,
+      "cohort_size": 9746
+    },
+    {
+      "cohort": "2015-11",
+      "months_since": 7,
+      "retained": 0.4814282782680074,
+      "cohort_size": 9746
+    },
+    {
+      "cohort": "2015-11",
+      "months_since": 8,
+      "retained": 0.4866611943361379,
+      "cohort_size": 9746
+    },
+    {
+      "cohort": "2015-11",
+      "months_since": 9,
+      "retained": 0.48440385799302277,
+      "cohort_size": 9746
+    },
+    {
+      "cohort": "2015-11",
+      "months_since": 10,
+      "retained": 0.4835830084137082,
+      "cohort_size": 9746
+    },
+    {
+      "cohort": "2015-11",
+      "months_since": 11,
+      "retained": 0.4817360968602504,
+      "cohort_size": 9746
+    },
+    {
+      "cohort": "2015-11",
+      "months_since": 12,
+      "retained": 0.4884054996921814,
+      "cohort_size": 9746
+    },
+    {
+      "cohort": "2015-11",
+      "months_since": 13,
+      "retained": 0.4729119638826185,
+      "cohort_size": 9746
+    },
+    {
+      "cohort": "2015-11",
+      "months_since": 14,
+      "retained": 0.45628975990149806,
+      "cohort_size": 9746
+    },
+    {
+      "cohort": "2015-11",
+      "months_since": 15,
+      "retained": 0.4465421711471373,
+      "cohort_size": 9746
+    },
+    {
+      "cohort": "2015-11",
+      "months_since": 16,
+      "retained": 0.4422327108557357,
+      "cohort_size": 9746
+    },
+    {
+      "cohort": "2015-12",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 9610
+    },
+    {
+      "cohort": "2015-12",
+      "months_since": 1,
+      "retained": 0.9651404786680541,
+      "cohort_size": 9610
+    },
+    {
+      "cohort": "2015-12",
+      "months_since": 2,
+      "retained": 0.5413111342351717,
+      "cohort_size": 9610
+    },
+    {
+      "cohort": "2015-12",
+      "months_since": 3,
+      "retained": 0.48366285119667013,
+      "cohort_size": 9610
+    },
+    {
+      "cohort": "2015-12",
+      "months_since": 4,
+      "retained": 0.4562955254942768,
+      "cohort_size": 9610
+    },
+    {
+      "cohort": "2015-12",
+      "months_since": 5,
+      "retained": 0.45265348595213317,
+      "cohort_size": 9610
+    },
+    {
+      "cohort": "2015-12",
+      "months_since": 6,
+      "retained": 0.44516129032258067,
+      "cohort_size": 9610
+    },
+    {
+      "cohort": "2015-12",
+      "months_since": 7,
+      "retained": 0.4493236212278876,
+      "cohort_size": 9610
+    },
+    {
+      "cohort": "2015-12",
+      "months_since": 8,
+      "retained": 0.44828303850156087,
+      "cohort_size": 9610
+    },
+    {
+      "cohort": "2015-12",
+      "months_since": 9,
+      "retained": 0.44526534859521333,
+      "cohort_size": 9610
+    },
+    {
+      "cohort": "2015-12",
+      "months_since": 10,
+      "retained": 0.4422476586888658,
+      "cohort_size": 9610
+    },
+    {
+      "cohort": "2015-12",
+      "months_since": 11,
+      "retained": 0.44516129032258067,
+      "cohort_size": 9610
+    },
+    {
+      "cohort": "2015-12",
+      "months_since": 12,
+      "retained": 0.43600416233090533,
+      "cohort_size": 9610
+    },
+    {
+      "cohort": "2015-12",
+      "months_since": 13,
+      "retained": 0.427471383975026,
+      "cohort_size": 9610
+    },
+    {
+      "cohort": "2015-12",
+      "months_since": 14,
+      "retained": 0.41446409989594174,
+      "cohort_size": 9610
+    },
+    {
+      "cohort": "2015-12",
+      "months_since": 15,
+      "retained": 0.40145681581685744,
+      "cohort_size": 9610
+    },
+    {
+      "cohort": "2016-01",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 8965
+    },
+    {
+      "cohort": "2016-01",
+      "months_since": 1,
+      "retained": 0.9936419408812047,
+      "cohort_size": 8965
+    },
+    {
+      "cohort": "2016-01",
+      "months_since": 2,
+      "retained": 0.6902398215281651,
+      "cohort_size": 8965
+    },
+    {
+      "cohort": "2016-01",
+      "months_since": 3,
+      "retained": 0.6511991076408254,
+      "cohort_size": 8965
+    },
+    {
+      "cohort": "2016-01",
+      "months_since": 4,
+      "retained": 0.637479085331846,
+      "cohort_size": 8965
+    },
+    {
+      "cohort": "2016-01",
+      "months_since": 5,
+      "retained": 0.6355828220858896,
+      "cohort_size": 8965
+    },
+    {
+      "cohort": "2016-01",
+      "months_since": 6,
+      "retained": 0.6891243725599554,
+      "cohort_size": 8965
+    },
+    {
+      "cohort": "2016-01",
+      "months_since": 7,
+      "retained": 0.6788622420524261,
+      "cohort_size": 8965
+    },
+    {
+      "cohort": "2016-01",
+      "months_since": 8,
+      "retained": 0.6677077523703291,
+      "cohort_size": 8965
+    },
+    {
+      "cohort": "2016-01",
+      "months_since": 9,
+      "retained": 0.6585610708310095,
+      "cohort_size": 8965
+    },
+    {
+      "cohort": "2016-01",
+      "months_since": 10,
+      "retained": 0.6540992749581707,
+      "cohort_size": 8965
+    },
+    {
+      "cohort": "2016-01",
+      "months_since": 11,
+      "retained": 0.6359174567763525,
+      "cohort_size": 8965
+    },
+    {
+      "cohort": "2016-01",
+      "months_since": 12,
+      "retained": 0.6278862242052426,
+      "cohort_size": 8965
+    },
+    {
+      "cohort": "2016-01",
+      "months_since": 13,
+      "retained": 0.5898494143892917,
+      "cohort_size": 8965
+    },
+    {
+      "cohort": "2016-01",
+      "months_since": 14,
+      "retained": 0.5540435025097602,
+      "cohort_size": 8965
+    },
+    {
+      "cohort": "2016-02",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 7155
+    },
+    {
+      "cohort": "2016-02",
+      "months_since": 1,
+      "retained": 0.9654786862334032,
+      "cohort_size": 7155
+    },
+    {
+      "cohort": "2016-02",
+      "months_since": 2,
+      "retained": 0.696575821104123,
+      "cohort_size": 7155
+    },
+    {
+      "cohort": "2016-02",
+      "months_since": 3,
+      "retained": 0.6716981132075471,
+      "cohort_size": 7155
+    },
+    {
+      "cohort": "2016-02",
+      "months_since": 4,
+      "retained": 0.653948287910552,
+      "cohort_size": 7155
+    },
+    {
+      "cohort": "2016-02",
+      "months_since": 5,
+      "retained": 0.6807826694619148,
+      "cohort_size": 7155
+    },
+    {
+      "cohort": "2016-02",
+      "months_since": 6,
+      "retained": 0.6726764500349406,
+      "cohort_size": 7155
+    },
+    {
+      "cohort": "2016-02",
+      "months_since": 7,
+      "retained": 0.6585604472396925,
+      "cohort_size": 7155
+    },
+    {
+      "cohort": "2016-02",
+      "months_since": 8,
+      "retained": 0.6489168413696715,
+      "cohort_size": 7155
+    },
+    {
+      "cohort": "2016-02",
+      "months_since": 9,
+      "retained": 0.6441649196366177,
+      "cohort_size": 7155
+    },
+    {
+      "cohort": "2016-02",
+      "months_since": 10,
+      "retained": 0.6222222222222222,
+      "cohort_size": 7155
+    },
+    {
+      "cohort": "2016-02",
+      "months_since": 11,
+      "retained": 0.6171907756813417,
+      "cohort_size": 7155
+    },
+    {
+      "cohort": "2016-02",
+      "months_since": 12,
+      "retained": 0.6079664570230608,
+      "cohort_size": 7155
+    },
+    {
+      "cohort": "2016-02",
+      "months_since": 13,
+      "retained": 0.5758211041229909,
+      "cohort_size": 7155
+    },
+    {
+      "cohort": "2016-03",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 5983
+    },
+    {
+      "cohort": "2016-03",
+      "months_since": 1,
+      "retained": 0.9809460137054989,
+      "cohort_size": 5983
+    },
+    {
+      "cohort": "2016-03",
+      "months_since": 2,
+      "retained": 0.6675580812301521,
+      "cohort_size": 5983
+    },
+    {
+      "cohort": "2016-03",
+      "months_since": 3,
+      "retained": 0.6398128029416681,
+      "cohort_size": 5983
+    },
+    {
+      "cohort": "2016-03",
+      "months_since": 4,
+      "retained": 0.6807621594517801,
+      "cohort_size": 5983
+    },
+    {
+      "cohort": "2016-03",
+      "months_since": 5,
+      "retained": 0.6730737088417182,
+      "cohort_size": 5983
+    },
+    {
+      "cohort": "2016-03",
+      "months_since": 6,
+      "retained": 0.6657195386929634,
+      "cohort_size": 5983
+    },
+    {
+      "cohort": "2016-03",
+      "months_since": 7,
+      "retained": 0.6500083570115327,
+      "cohort_size": 5983
+    },
+    {
+      "cohort": "2016-03",
+      "months_since": 8,
+      "retained": 0.6423199064014709,
+      "cohort_size": 5983
+    },
+    {
+      "cohort": "2016-03",
+      "months_since": 9,
+      "retained": 0.6271101454120007,
+      "cohort_size": 5983
+    },
+    {
+      "cohort": "2016-03",
+      "months_since": 10,
+      "retained": 0.6189202741099783,
+      "cohort_size": 5983
+    },
+    {
+      "cohort": "2016-03",
+      "months_since": 11,
+      "retained": 0.6078890188868461,
+      "cohort_size": 5983
+    },
+    {
+      "cohort": "2016-03",
+      "months_since": 12,
+      "retained": 0.5978606050476349,
+      "cohort_size": 5983
+    },
+    {
+      "cohort": "2016-04",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 3900
+    },
+    {
+      "cohort": "2016-04",
+      "months_since": 1,
+      "retained": 0.9976923076923077,
+      "cohort_size": 3900
+    },
+    {
+      "cohort": "2016-04",
+      "months_since": 2,
+      "retained": 0.5869230769230769,
+      "cohort_size": 3900
+    },
+    {
+      "cohort": "2016-04",
+      "months_since": 3,
+      "retained": 0.6094871794871795,
+      "cohort_size": 3900
+    },
+    {
+      "cohort": "2016-04",
+      "months_since": 4,
+      "retained": 0.5915384615384616,
+      "cohort_size": 3900
+    },
+    {
+      "cohort": "2016-04",
+      "months_since": 5,
+      "retained": 0.5769230769230769,
+      "cohort_size": 3900
+    },
+    {
+      "cohort": "2016-04",
+      "months_since": 6,
+      "retained": 0.5733333333333334,
+      "cohort_size": 3900
+    },
+    {
+      "cohort": "2016-04",
+      "months_since": 7,
+      "retained": 0.5623076923076923,
+      "cohort_size": 3900
+    },
+    {
+      "cohort": "2016-04",
+      "months_since": 8,
+      "retained": 0.5384615384615384,
+      "cohort_size": 3900
+    },
+    {
+      "cohort": "2016-04",
+      "months_since": 9,
+      "retained": 0.5248717948717949,
+      "cohort_size": 3900
+    },
+    {
+      "cohort": "2016-04",
+      "months_since": 10,
+      "retained": 0.5161538461538462,
+      "cohort_size": 3900
+    },
+    {
+      "cohort": "2016-04",
+      "months_since": 11,
+      "retained": 0.5069230769230769,
+      "cohort_size": 3900
+    },
+    {
+      "cohort": "2016-05",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 4320
+    },
+    {
+      "cohort": "2016-05",
+      "months_since": 1,
+      "retained": 0.98125,
+      "cohort_size": 4320
+    },
+    {
+      "cohort": "2016-05",
+      "months_since": 2,
+      "retained": 0.7240740740740741,
+      "cohort_size": 4320
+    },
+    {
+      "cohort": "2016-05",
+      "months_since": 3,
+      "retained": 0.7043981481481482,
+      "cohort_size": 4320
+    },
+    {
+      "cohort": "2016-05",
+      "months_since": 4,
+      "retained": 0.6842592592592592,
+      "cohort_size": 4320
+    },
+    {
+      "cohort": "2016-05",
+      "months_since": 5,
+      "retained": 0.6719907407407407,
+      "cohort_size": 4320
+    },
+    {
+      "cohort": "2016-05",
+      "months_since": 6,
+      "retained": 0.6699074074074074,
+      "cohort_size": 4320
+    },
+    {
+      "cohort": "2016-05",
+      "months_since": 7,
+      "retained": 0.6400462962962963,
+      "cohort_size": 4320
+    },
+    {
+      "cohort": "2016-05",
+      "months_since": 8,
+      "retained": 0.6252314814814814,
+      "cohort_size": 4320
+    },
+    {
+      "cohort": "2016-05",
+      "months_since": 9,
+      "retained": 0.6138888888888889,
+      "cohort_size": 4320
+    },
+    {
+      "cohort": "2016-05",
+      "months_since": 10,
+      "retained": 0.6055555555555555,
+      "cohort_size": 4320
+    },
+    {
+      "cohort": "2016-06",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 5454
+    },
+    {
+      "cohort": "2016-06",
+      "months_since": 1,
+      "retained": 0.9327099376604328,
+      "cohort_size": 5454
+    },
+    {
+      "cohort": "2016-06",
+      "months_since": 2,
+      "retained": 0.6398973230656398,
+      "cohort_size": 5454
+    },
+    {
+      "cohort": "2016-06",
+      "months_since": 3,
+      "retained": 0.6160616061606161,
+      "cohort_size": 5454
+    },
+    {
+      "cohort": "2016-06",
+      "months_since": 4,
+      "retained": 0.6032269893656033,
+      "cohort_size": 5454
+    },
+    {
+      "cohort": "2016-06",
+      "months_since": 5,
+      "retained": 0.6035936927026035,
+      "cohort_size": 5454
+    },
+    {
+      "cohort": "2016-06",
+      "months_since": 6,
+      "retained": 0.5777411074440777,
+      "cohort_size": 5454
+    },
+    {
+      "cohort": "2016-06",
+      "months_since": 7,
+      "retained": 0.5643564356435643,
+      "cohort_size": 5454
+    },
+    {
+      "cohort": "2016-06",
+      "months_since": 8,
+      "retained": 0.557022368903557,
+      "cohort_size": 5454
+    },
+    {
+      "cohort": "2016-06",
+      "months_since": 9,
+      "retained": 0.5487715438210488,
+      "cohort_size": 5454
+    },
+    {
+      "cohort": "2016-07",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 6425
+    },
+    {
+      "cohort": "2016-07",
+      "months_since": 1,
+      "retained": 0.810739299610895,
+      "cohort_size": 6425
+    },
+    {
+      "cohort": "2016-07",
+      "months_since": 2,
+      "retained": 0.6975875486381323,
+      "cohort_size": 6425
+    },
+    {
+      "cohort": "2016-07",
+      "months_since": 3,
+      "retained": 0.68715953307393,
+      "cohort_size": 6425
+    },
+    {
+      "cohort": "2016-07",
+      "months_since": 4,
+      "retained": 0.6761089494163424,
+      "cohort_size": 6425
+    },
+    {
+      "cohort": "2016-07",
+      "months_since": 5,
+      "retained": 0.6449805447470817,
+      "cohort_size": 6425
+    },
+    {
+      "cohort": "2016-07",
+      "months_since": 6,
+      "retained": 0.6347081712062257,
+      "cohort_size": 6425
+    },
+    {
+      "cohort": "2016-07",
+      "months_since": 7,
+      "retained": 0.6224124513618677,
+      "cohort_size": 6425
+    },
+    {
+      "cohort": "2016-07",
+      "months_since": 8,
+      "retained": 0.6108949416342413,
+      "cohort_size": 6425
+    },
+    {
+      "cohort": "2016-08",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 6677
+    },
+    {
+      "cohort": "2016-08",
+      "months_since": 1,
+      "retained": 0.9317058559233189,
+      "cohort_size": 6677
+    },
+    {
+      "cohort": "2016-08",
+      "months_since": 2,
+      "retained": 0.6032649393440168,
+      "cohort_size": 6677
+    },
+    {
+      "cohort": "2016-08",
+      "months_since": 3,
+      "retained": 0.6032649393440168,
+      "cohort_size": 6677
+    },
+    {
+      "cohort": "2016-08",
+      "months_since": 4,
+      "retained": 0.5592331885577355,
+      "cohort_size": 6677
+    },
+    {
+      "cohort": "2016-08",
+      "months_since": 5,
+      "retained": 0.5459038490339974,
+      "cohort_size": 6677
+    },
+    {
+      "cohort": "2016-08",
+      "months_since": 6,
+      "retained": 0.536768009585143,
+      "cohort_size": 6677
+    },
+    {
+      "cohort": "2016-08",
+      "months_since": 7,
+      "retained": 0.5231391343417703,
+      "cohort_size": 6677
+    },
+    {
+      "cohort": "2016-09",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 6512
+    },
+    {
+      "cohort": "2016-09",
+      "months_since": 1,
+      "retained": 0.5214987714987716,
+      "cohort_size": 6512
+    },
+    {
+      "cohort": "2016-09",
+      "months_since": 2,
+      "retained": 0.4758906633906634,
+      "cohort_size": 6512
+    },
+    {
+      "cohort": "2016-09",
+      "months_since": 3,
+      "retained": 0.41784398034398035,
+      "cohort_size": 6512
+    },
+    {
+      "cohort": "2016-09",
+      "months_since": 4,
+      "retained": 0.4004914004914005,
+      "cohort_size": 6512
+    },
+    {
+      "cohort": "2016-09",
+      "months_since": 5,
+      "retained": 0.3898955773955774,
+      "cohort_size": 6512
+    },
+    {
+      "cohort": "2016-09",
+      "months_since": 6,
+      "retained": 0.3808353808353808,
+      "cohort_size": 6512
+    },
+    {
+      "cohort": "2016-10",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 9951
+    },
+    {
+      "cohort": "2016-10",
+      "months_since": 1,
+      "retained": 0.7507788161993769,
+      "cohort_size": 9951
+    },
+    {
+      "cohort": "2016-10",
+      "months_since": 2,
+      "retained": 0.3099186011456135,
+      "cohort_size": 9951
+    },
+    {
+      "cohort": "2016-10",
+      "months_since": 3,
+      "retained": 0.2967540950658225,
+      "cohort_size": 9951
+    },
+    {
+      "cohort": "2016-10",
+      "months_since": 4,
+      "retained": 0.2880112551502362,
+      "cohort_size": 9951
+    },
+    {
+      "cohort": "2016-10",
+      "months_since": 5,
+      "retained": 0.2803738317757009,
+      "cohort_size": 9951
+    },
+    {
+      "cohort": "2016-11",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 14609
+    },
+    {
+      "cohort": "2016-11",
+      "months_since": 1,
+      "retained": 0.3847628174413033,
+      "cohort_size": 14609
+    },
+    {
+      "cohort": "2016-11",
+      "months_since": 2,
+      "retained": 0.22602505304949003,
+      "cohort_size": 14609
+    },
+    {
+      "cohort": "2016-11",
+      "months_since": 3,
+      "retained": 0.22006981997398864,
+      "cohort_size": 14609
+    },
+    {
+      "cohort": "2016-11",
+      "months_since": 4,
+      "retained": 0.21459374358272298,
+      "cohort_size": 14609
+    },
+    {
+      "cohort": "2016-12",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 4142
+    },
+    {
+      "cohort": "2016-12",
+      "months_since": 1,
+      "retained": 0.9792370835345244,
+      "cohort_size": 4142
+    },
+    {
+      "cohort": "2016-12",
+      "months_since": 2,
+      "retained": 0.8068565910188314,
+      "cohort_size": 4142
+    },
+    {
+      "cohort": "2016-12",
+      "months_since": 3,
+      "retained": 0.781989377112506,
+      "cohort_size": 4142
+    },
+    {
+      "cohort": "2017-01",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 3730
+    },
+    {
+      "cohort": "2017-01",
+      "months_since": 1,
+      "retained": 0.942627345844504,
+      "cohort_size": 3730
+    },
+    {
+      "cohort": "2017-01",
+      "months_since": 2,
+      "retained": 0.8195710455764075,
+      "cohort_size": 3730
+    },
+    {
+      "cohort": "2017-02",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 3705
+    },
+    {
+      "cohort": "2017-02",
+      "months_since": 1,
+      "retained": 0.9927125506072875,
+      "cohort_size": 3705
+    },
+    {
+      "cohort": "2017-03",
+      "months_since": 0,
+      "retained": 1.0,
+      "cohort_size": 3528
+    }
+  ],
+  "label_validation": {
+    "official_users": 99604,
+    "in_our_cohort": 88101,
+    "agreement": 0.9839615895392788,
+    "churner_recall": 0.7136354231326298,
+    "churner_precision": 0.9916618746405981,
+    "false_negatives": 1384,
+    "false_positives": 29,
+    "our_churn_rate": 0.03947741796347374,
+    "official_churn_rate": 0.05485749310450506
+  },
+  "settings": {
+    "train_months": [
+      "2016-07",
+      "2016-08",
+      "2016-09",
+      "2016-10"
+    ],
+    "valid_month": "2016-12",
+    "test_month": "2017-02",
+    "churn_window_days": 30,
+    "contact_cost": 50.0,
+    "success_rate": 0.2,
+    "customer_value": 1788.0,
+    "sample_share_of_kkbox_users": 0.1,
+    "bundle_customers": 20000,
+    "bundle_is_synthetic": true,
+    "test_customers": 88109
+  }
+}

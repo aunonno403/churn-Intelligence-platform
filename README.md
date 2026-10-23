@@ -4,6 +4,11 @@
 answers three questions: *who is about to leave, why, and who is worth spending money on to
 keep?*
 
+**[▶ Try the live app](LIVE_APP_URL)** · the live app uses *synthetic* customers, see
+[why](#about-the-live-app)
+
+![A short tour of the app](docs/images/app_tour.gif)
+
 You don't need any background in data science to read this page. Every term is explained
 the first time it comes up, and there is a [glossary](#glossary) at the end.
 
@@ -128,6 +133,29 @@ All of this is in an interactive web app with four pages:
    or loss and a list of who to contact, which you can download.
 4. **Model card:** an honest report on how well the model works and where it falls short.
 
+| Overview | Why is this customer at risk? | What should we spend? |
+|---|---|---|
+| ![Overview page](docs/images/overview.png) | ![Risk explorer page](docs/images/risk_explorer.png) | ![Campaign simulator page](docs/images/campaign_simulator.png) |
+
+*These screenshots were taken on the real data, on my own computer.*
+
+### About the live app
+
+KKBox's data comes from a Kaggle competition whose rules don't allow sharing it. So the
+public app runs on **synthetic customers**: 20,000 made-up people generated to look like
+the real ones. Each column has a realistic spread of values, and the columns go together
+as they do in real life (for example, people who switch auto-renew off also tend to pay
+less). But no row is a real customer, and we check that no fake row matches a real one.
+Their "did they leave?" answers are drawn at random from the model's own predictions.
+
+What this means for you:
+
+- **Real:** the headline numbers, the charts, the model and the model card.
+- **Synthetic:** the customer lists in the *Risk explorer* and *Campaign simulator*, and the
+  "simulated outcome" figure. Patterns there are softer than in the real data. For
+  example, turning auto-renew off makes a fake customer about 4× more likely to leave,
+  against 13× in the real data.
+
 To run it on your own computer, see [Run it yourself](#run-it-yourself).
 
 ---
@@ -142,6 +170,7 @@ To run it on your own computer, see [Run it yourself](#run-it-yourself).
 - **10% of customers.** We used a sample to keep the project small. Testing showed that
   more data would improve the results only a little.
 - **Old data.** KKBox data ends in March 2017. Behaviour today may differ.
+- **The live app's customers are synthetic.** See [above](#about-the-live-app).
 - **The customer groups in the experiment are not proven.** The uplift model also sorts
   people into four groups (for example "persuadable" and "sleeping dog"). On data the
   model had not seen, these groups were not clearly different, so we report their numbers
@@ -173,7 +202,15 @@ To run it on your own computer, see [Run it yourself](#run-it-yourself).
 
 *This part is for people comfortable with a terminal.*
 
-You need [uv](https://docs.astral.sh/uv/), a free Kaggle account, and to accept the
+**Just the app (about 5 minutes).** The synthetic data ships with the repo, so you only
+need [uv](https://docs.astral.sh/uv/):
+
+```bash
+uv sync
+uv run streamlit run app/streamlit_app.py
+```
+
+**The whole pipeline, from raw data.** You need uv, a free Kaggle account, and to accept the
 [KKBox competition rules](https://www.kaggle.com/c/kkbox-churn-prediction-challenge) on
 Kaggle. The full rebuild downloads about 30 GB and takes a few hours, but it never needs
 more than about 16 GB of free disk at once.
@@ -187,7 +224,7 @@ uv run churn train        # train and test the model
 uv run churn economics    # the money analysis
 uv run churn explain      # the "why" analysis
 uv run churn uplift       # the email experiment analysis
-uv run churn bundle       # pack a small sample for the app
+uv run churn bundle       # make the synthetic customers for the app
 uv run churn clean-raw    # optional: delete the big raw files afterwards
 uv run streamlit run app/streamlit_app.py   # open the app
 ```
