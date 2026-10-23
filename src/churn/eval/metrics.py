@@ -33,22 +33,56 @@ def evaluate(y: np.ndarray, p: np.ndarray) -> dict[str, float]:
     }
 
 
+# Chart palette, shared by every figure: validated reference palette, series slots 1-4 in
+# order, plus the light chart surface and its ink. Change colours here only.
+BLUE, ORANGE, AQUA, YELLOW = "#2a78d6", "#eb6834", "#1baf7a", "#eda100"
+SURFACE, INK, MUTED, GRID = "#fcfcfb", "#52514e", "#898781", "#e1e0d9"
+
+
+def figure(**kwargs) -> Figure:
+    return Figure(facecolor=SURFACE, **kwargs)
+
+
+def style(ax) -> None:
+    ax.set_facecolor(SURFACE)
+    for side in ("top", "right"):
+        ax.spines[side].set_visible(False)
+    ax.grid(color=GRID, lw=0.6)
+
+
 def reliability_plot(y: np.ndarray, curves: dict[str, np.ndarray], title: str, path: Path) -> None:
     """Observed churn rate vs mean predicted probability, in equal-count bins."""
-    colors = ["#2a78d6", "#eb6834"]  # reference palette, slots 1-2
-    fig = Figure(figsize=(5.2, 5.2), facecolor="#fcfcfb")
+    fig = figure(figsize=(5.2, 5.2))
     ax = fig.subplots()
-    ax.set_facecolor("#fcfcfb")
+    style(ax)
     top = max(float(np.quantile(p, 0.995)) for p in curves.values()) * 1.1
-    ax.plot([0, top], [0, top], color="#898781", ls="--", lw=1, label="perfect calibration")
-    for (name, p), color in zip(curves.items(), colors, strict=False):
+    ax.plot([0, top], [0, top], color=MUTED, ls="--", lw=1, label="perfect calibration")
+    for (name, p), color in zip(curves.items(), [BLUE, ORANGE], strict=False):
         observed, predicted = calibration_curve(y, p, n_bins=15, strategy="quantile")
         ax.plot(predicted, observed, marker="o", ms=5, lw=2, color=color, label=name)
     ax.set(xlim=(0, top), ylim=(0, top), xlabel="Mean predicted churn probability",
            ylabel="Observed churn rate")  # fmt: skip
     ax.set_title(title, loc="left", fontsize=11)
-    for side in ("top", "right"):
-        ax.spines[side].set_visible(False)
-    ax.grid(color="#e1e0d9", lw=0.6)
     ax.legend(frameon=False, loc="upper left")
     fig.savefig(path, bbox_inches="tight", dpi=110)
+
+
+def qini_curve(y: np.ndarray, treated: np.ndarray, score: np.ndarray) -> np.ndarray:
+    """Incremental responders from treating the top k customers by `score`, for k = 0..n.
+
+    Q(k) = R_t(k) - R_c(k) * N_t(k) / N_c(k): responders among the treated in the top k,
+    minus control responders scaled up to the same group size (valid only in an RCT).
+    """
+    order = np.argsort(-np.asarray(score), kind="stable")
+    y, t = np.asarray(y, float)[order], np.asarray(treated, float)[order]
+    r_t, r_c = np.cumsum(y * t), np.cumsum(y * (1 - t))
+    n_t, n_c = np.cumsum(t), np.cumsum(1 - t)
+    scaled_c = np.divide(r_c * n_t, n_c, out=np.zeros_like(r_c), where=n_c > 0)
+    return np.concatenate([[0.0], r_t - scaled_c])
+
+
+def qini_coefficient(curve: np.ndarray) -> float:
+    """Area between a Qini curve and random targeting, per customer (x runs 0..1)."""
+    n = len(curve) - 1
+    x = np.linspace(0, 1, n + 1)
+    return float(np.trapezoid((curve - x * curve[-1]) / n, x))

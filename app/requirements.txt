@@ -1,0 +1,13 @@
+# What the app imports, nothing more (the training stack stays in pyproject.toml).
+# scikit-learn and lightgbm are pinned to the versions that saved app/bundle/model.joblib:
+# a pickled model is only guaranteed to load with the library versions that wrote it.
+streamlit>=1.46  # width="stretch"
+altair>=5
+pandas>=2.2
+pyarrow>=17
+numpy>=1.26
+scipy>=1.13
+joblib>=1.4
+matplotlib>=3.9
+scikit-learn==1.9.1
+lightgbm==4.7.0

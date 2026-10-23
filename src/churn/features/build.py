@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 import logging
+from typing import TYPE_CHECKING
 
 import duckdb
+import joblib
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
@@ -12,7 +14,11 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import OneHotEncoder, QuantileTransformer
 
 from churn.config import Settings
+from churn.data.splits import TEST
 from churn.data.sql import render
+
+if TYPE_CHECKING:
+    from churn.models.model import ChurnModel
 
 log = logging.getLogger(__name__)
 
@@ -41,6 +47,13 @@ def load_dataset(con: duckdb.DuckDBPyConnection) -> pd.DataFrame:
     for c in CATEGORICAL:
         df[c] = df[c].astype("category")
     return df
+
+
+def load_test_cohort(settings: Settings) -> tuple[pd.DataFrame, ChurnModel]:
+    """The test-month rows and the saved model: what every report (and the app) scores."""
+    with duckdb.connect(str(settings.db_path), read_only=True) as con:
+        df = load_dataset(con)
+    return df[df.split == TEST], joblib.load(settings.model_dir / "model.joblib")
 
 
 def feature_columns(df: pd.DataFrame) -> list[str]:

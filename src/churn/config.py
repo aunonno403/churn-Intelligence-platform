@@ -6,7 +6,7 @@ from datetime import date, timedelta
 from functools import lru_cache
 from pathlib import Path
 
-from pydantic import model_validator
+from pydantic import Field, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -59,6 +59,14 @@ class Settings(BaseSettings):
     # Budgeted LightGBM search: whichever limit is hit first ends the study.
     optuna_trials: int = 50
     optuna_timeout_s: int = 1800
+
+    # --- retention economics (assumptions, NTD; the app exposes them as sliders) ----------
+    # Value of keeping a customer: one year of the standard 149 NTD/month plan.
+    customer_value: float = Field(149 * 12, gt=0)
+    # Cost per contacted customer: outreach plus the incentive offered.
+    contact_cost: float = Field(50.0, gt=0)
+    # Share of contacted would-be churners the offer keeps.
+    success_rate: float = Field(0.20, gt=0, le=1)
 
     @property
     def raw_dir(self) -> Path:

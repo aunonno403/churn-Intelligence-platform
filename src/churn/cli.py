@@ -59,6 +59,33 @@ def cmd_train(_: argparse.Namespace) -> None:
     train(get_settings())
 
 
+def cmd_economics(_: argparse.Namespace) -> None:
+    from churn.eval.economics import report
+
+    logging.info(
+        "Campaign economics on the test cohort: %s", json.dumps(report(get_settings()), indent=2)
+    )
+
+
+def cmd_explain(_: argparse.Namespace) -> None:
+    from churn.explain.shap_utils import report
+
+    for d in report(get_settings()):
+        logging.info("%s", d["sentence"])
+
+
+def cmd_uplift(_: argparse.Namespace) -> None:
+    from churn.models.uplift import report
+
+    logging.info("Uplift on the Hillstrom RCT: %s", json.dumps(report(get_settings()), indent=2))
+
+
+def cmd_bundle(_: argparse.Namespace) -> None:
+    from churn.bundle import build_bundle
+
+    build_bundle(get_settings())
+
+
 def cmd_clean_raw(_: argparse.Namespace) -> None:
     from churn.data.ingest import clean_raw
 
@@ -74,6 +101,16 @@ def main() -> None:
     sub.add_parser("labels", help="Rebuild labels from DuckDB only").set_defaults(func=cmd_labels)
     sub.add_parser("features", help="Build the feature table").set_defaults(func=cmd_features)
     sub.add_parser("train", help="Train, tune, calibrate, evaluate").set_defaults(func=cmd_train)
+    sub.add_parser("economics", help="Net-savings curve on the test cohort").set_defaults(
+        func=cmd_economics
+    )
+    sub.add_parser("explain", help="SHAP drivers on the test cohort").set_defaults(func=cmd_explain)
+    sub.add_parser("uplift", help="Uplift vs risk targeting on Hillstrom").set_defaults(
+        func=cmd_uplift
+    )
+    sub.add_parser("bundle", help="Export the small data bundle the app runs on").set_defaults(
+        func=cmd_bundle
+    )
     sub.add_parser(
         "clean-raw", help="Delete data/raw after verifying the DuckDB tables"
     ).set_defaults(func=cmd_clean_raw)

@@ -39,3 +39,11 @@ def test_label_horizon_beyond_data_end_is_rejected():
 def test_unordered_months_are_rejected():
     with pytest.raises(ValidationError, match="strictly increasing"):
         Settings(train_months=["2016-10", "2016-09"])
+
+
+@pytest.mark.parametrize(
+    "bad", [{"success_rate": 0}, {"success_rate": 1.5}, {"contact_cost": -1}, {"customer_value": 0}]
+)
+def test_economics_assumptions_are_bounded(bad):
+    with pytest.raises(ValidationError):
+        Settings(**bad)
